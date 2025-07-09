@@ -17,13 +17,17 @@ document.addEventListener("DOMContentLoaded", () => {
   whatsappBtn.addEventListener("click", () => {
     if (clickCount < maxClicks) {
       clickCount++;
-      counterText.innerText = `Click count: ${clickCount}/${maxClicks}`;
 
-      let url = `https://wa.me/?text=${encodeURIComponent("Hey Buddy, Join Tech For Girls Community")}`;
+      // ✅ WhatsApp message + link update here
+      let shareMessage = `Hey Buddy, Join Tech For Girls Community 👩‍💻 Click here to register: https://sowmya584.github.io/registration-form`;
+
+      let url = `https://wa.me/?text=${encodeURIComponent(shareMessage)}`;
       window.open(url, "_blank");
 
+      counterText.innerText = `Click count: ${clickCount}/${maxClicks}`;
+
       if (clickCount === maxClicks) {
-        message.innerText = "Sharing complete. Please continue.";
+        message.innerText = "✅ Sharing complete. Please continue.";
       }
     }
   });
@@ -32,16 +36,14 @@ document.addEventListener("DOMContentLoaded", () => {
     e.preventDefault();
 
     if (clickCount < maxClicks) {
-      alert("Please complete sharing on WhatsApp first!");
+      alert("⚠️ Please complete sharing on WhatsApp first!");
       return;
     }
 
-    // Save form data to Google Sheets using Google Apps Script here
-    // Replace this comment with your fetch() code to submit form
+    // Submit to Google Sheet via Apps Script – (implement fetch() here)
 
-    // Simulate successful submission
     message.innerText = "🎉 Your submission has been recorded. Thanks for being part of Tech for Girls!";
     form.querySelectorAll("input, button").forEach(el => el.disabled = true);
     localStorage.setItem("submitted", "true");
   });
-});   
+});
